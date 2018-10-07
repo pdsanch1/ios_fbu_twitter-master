@@ -14,17 +14,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // MARK: TODO: Check for logged in user
+        if User.current != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeTimelineViewController = storyboard.instantiateViewController(withIdentifier: "TimelineVC")
+            window?.rootViewController = homeTimelineViewController
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Logout notification received")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = loginVC
+        }
         
         return true
     }
     
     // MARK: TODO: Open URL
     // OAuth step 2
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         // Handle urlcallback sent from Twitter
+        print("url: \(url.description)")
+        
         APIManager.shared.handle(url: url)
         return true
     }
@@ -32,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        // Handle urlcallback sent from Twitter
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

@@ -6,7 +6,7 @@ target 'twitter_alamofire_demo' do
   use_frameworks!
 
   # Pods for twitter_alamofire_demo
-  pod 'Alamofire'
+  pod 'AlamofireImage'
   pod 'OAuthSwift'
   pod 'OAuthSwiftAlamofire'
   pod 'KeychainAccess'
