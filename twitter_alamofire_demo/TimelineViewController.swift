@@ -16,14 +16,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
-
-    @IBAction func doLogout(_ sender: Any) {
-          APIManager.shared.logout()
+    
+//    @IBAction func logmeOut(_ sender: Any) {
+//         APIManager.shared.logout()
+//    }
+    
+    @objc func logmeOutButton(_ sender: Any) {
+        APIManager.shared.logout()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+//        let addButton_1 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(logmeOutButton))
+        let addButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logmeOutButton))
+        
+        self.navigationItem.rightBarButtonItem = addButton
         tableView.dataSource = self
         tableView.delegate = self
         
