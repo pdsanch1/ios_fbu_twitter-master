@@ -35,7 +35,7 @@ class TweetCell
     
     
     @IBAction func retweetButton(_ sender: Any) {
-        print("HERE..............")
+        // print("HERE..............")
         if tweet.retweeted {
             APIManager.shared.unRetweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
@@ -102,16 +102,16 @@ class TweetCell
         screenNameLabel.text = "@" + tweet.user.screenName
         createdDateLabel.text = tweet.createdAtString
         profileImageView.af_setImage(withURL: tweet.user.profileImageUrl)
-//        if tweet.favorited {
-//            favoriteButton.setImage(UIImage(named: "favor-icon-red"), for: .normal)
-//        } else {
-//            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
-//        }
-//        if tweet.retweeted {
-//            retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
-//        } else {
-//            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
-//        }
+        if tweet.favorited {
+            favoriteButton.setImage(UIImage(named: "favor-icon-red"), for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+        }
+        if tweet.retweeted {
+            retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+        }
         retweetCountLabel.text = String(describing: tweet.retweetCount)
         favoriteCountLabel.text = String(describing: tweet.favoriteCount)
     }

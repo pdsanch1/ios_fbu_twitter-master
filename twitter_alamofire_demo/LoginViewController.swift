@@ -25,16 +25,24 @@ class LoginViewController: UIViewController {
     }
     
     
+   
     @IBAction func didTapLogin(_ sender: Any) {
         APIManager.shared.login(success: {
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        }) { (error) in
-            if let error = error {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                }) { (error) in
+                if let error = error {
                 print(error.localizedDescription)
-            }
+                }
         }
     }
     
+    
+//    APIManager.shared.login(success: {
+//    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+//    }) { (error) in
+//    if let error = error {
+//    print(error.localizedDescription)
+//    }
     
     
     

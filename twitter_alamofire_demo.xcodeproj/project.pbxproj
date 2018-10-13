@@ -12,10 +12,10 @@
 		AD70A6F1216893E3005BEA76 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD70A6F0216893E3005BEA76 /* User.swift */; };
 		AD70A6F3216893F4005BEA76 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD70A6F2216893F4005BEA76 /* Tweet.swift */; };
 		AD70A6F5216933FE005BEA76 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD70A6F4216933FE005BEA76 /* TweetCell.swift */; };
+		ADB9860E216D7B7900CDBD49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1AFD341E942B2500FD4B90 /* Main.storyboard */; };
+		ADB98627216E3B5B00CDBD49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1AFD371E942B2500FD4B90 /* Assets.xcassets */; };
 		BEBC8368211F4199003A5FE1 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC8367211F4199003A5FE1 /* TimelineViewController.swift */; };
 		ED1AFD311E942B2500FD4B90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1AFD301E942B2500FD4B90 /* AppDelegate.swift */; };
-		ED1AFD361E942B2500FD4B90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1AFD341E942B2500FD4B90 /* Main.storyboard */; };
-		ED1AFD381E942B2500FD4B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1AFD371E942B2500FD4B90 /* Assets.xcassets */; };
 		ED1AFD3B1E942B2500FD4B90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1AFD391E942B2500FD4B90 /* LaunchScreen.storyboard */; };
 		ED1AFD461E942B2500FD4B90 /* twitter_alamofire_demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1AFD451E942B2500FD4B90 /* twitter_alamofire_demoTests.swift */; };
 		ED1AFD511E942B2500FD4B90 /* twitter_alamofire_demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1AFD501E942B2500FD4B90 /* twitter_alamofire_demoUITests.swift */; };
@@ -336,9 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB9860E216D7B7900CDBD49 /* Main.storyboard in Resources */,
+				ADB98627216E3B5B00CDBD49 /* Assets.xcassets in Resources */,
 				ED1AFD3B1E942B2500FD4B90 /* LaunchScreen.storyboard in Resources */,
-				ED1AFD381E942B2500FD4B90 /* Assets.xcassets in Resources */,
-				ED1AFD361E942B2500FD4B90 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +631,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -647,6 +648,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

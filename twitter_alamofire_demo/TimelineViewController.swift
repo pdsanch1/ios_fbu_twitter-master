@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+// @objcMembers class
+@objcMembers class TimelineViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
@@ -16,23 +16,38 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-//    @IBAction func logmeOut(_ sender: Any) {
-//         APIManager.shared.logout()
-//    }
-    
-    @objc func logmeOutButton(_ sender: Any) {
+    @IBAction func logoutButton(_ sender: Any) {
         APIManager.shared.logout()
     }
     
+    
+    @IBOutlet weak var logoutNavItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+       //self.navigationController?.delegate = self
+        //self.navigationController?.navigationController?.delegate = self
+        //self.navigationController?.navigationBar.isHidden = false
+       // view.addSubview(self.navigationController!.view)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.setToolbarHidden(false, animated: true)
+        self.navigationController?.navigationItem.setRightBarButton(logoutNavItem, animated: true)
 
+        //self.navigationController?.navigationBar.setItems([logoutButton], animated: true)
+        
         // Do any additional setup after loading the view.
 //        let addButton_1 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(logmeOutButton))
-        let addButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logmeOutButton))
+//        let addButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logmeOutButton))
+//
         
-        self.navigationItem.rightBarButtonItem = addButton
+        
+//        self.navigationItem.rightBarButtonItem = addButton
+        
+        
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -50,10 +65,25 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 self.tweets = tweets
                 self.tableView.reloadData()
             } else if let error = error {
-                print("Error getting home timeline: " + error.localizedDescription)
+                print("<><> Error getting home timeline: " + error.localizedDescription)
             }
         }
     }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+
+        //self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.barStyle = .black
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.title = "Home"
+        
+        //self.navigationController?.setToolbarHidden(false, animated: true)
+    }
+    
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count

@@ -15,7 +15,7 @@ class User {
     var profileImageUrl: URL
     var followersCount: Int
     var followingsCount: Int
-    var backgroundImageUrl: URL
+    var backgroundImageUrl: URL?
     // for persisting user
     var dictionary: [String: Any]?
     private static var _current: User?
@@ -43,12 +43,12 @@ class User {
     }
     
     init(dictionary: [String: Any]) {
+        //print(dictionary["profile_use_background_image"] as? Bool)
         self.dictionary = dictionary
         name = dictionary["name"] as! String
         screenName = dictionary["screen_name"] as! String
-        profileImageUrl = URL(string: dictionary["profile_image_url_https"] as! String)!
-        backgroundImageUrl = profileImageUrl
-//        backgroundImageUrl = URL(string: dictionary["profile_background_image_url_https"] as! String)!
+        profileImageUrl = URL(string: (dictionary["profile_image_url_https"] as? String)!)!
+        backgroundImageUrl =  URL(string: dictionary["profile_background_image_url_https"] as? String ?? "")
         followersCount = dictionary["followers_count"] as! Int
         followingsCount = dictionary["friends_count"] as! Int
     }
