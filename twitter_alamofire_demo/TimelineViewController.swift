@@ -13,6 +13,7 @@ import UIKit
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
     
+   // var selectedIndexPath: IndexPath? // for TweetController
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,31 +21,18 @@ import UIKit
         APIManager.shared.logout()
     }
     
-    
-    @IBOutlet weak var logoutNavItem: UIBarButtonItem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-       //self.navigationController?.delegate = self
-        //self.navigationController?.navigationController?.delegate = self
-        //self.navigationController?.navigationBar.isHidden = false
-       // view.addSubview(self.navigationController!.view)
+ 
+        // Hoy
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.setToolbarHidden(false, animated: true)
-        self.navigationController?.navigationItem.setRightBarButton(logoutNavItem, animated: true)
 
-        //self.navigationController?.navigationBar.setItems([logoutButton], animated: true)
-        
-        // Do any additional setup after loading the view.
-//        let addButton_1 = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(logmeOutButton))
-//        let addButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logmeOutButton))
-//
-        
-        
-//        self.navigationItem.rightBarButtonItem = addButton
+        let addButton = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logoutButton))
+
+        self.navigationItem.rightBarButtonItem = addButton
         
         
         
@@ -74,12 +62,10 @@ import UIKit
     
     override func viewWillAppear(_ animated: Bool) {
 
-        //self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.barStyle = .black
+
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationItem.title = "Home"
         
-        //self.navigationController?.setToolbarHidden(false, animated: true)
     }
     
     
@@ -127,6 +113,17 @@ import UIKit
         refreshControlAction(refreshControl)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let tweetController = segue.destination as! TweetViewController
+            tweetController.tweet = tweets[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
+            //selectedIndexPath = indexPath
+            
+        }
+    }
     
     /*
     // MARK: - Navigation
