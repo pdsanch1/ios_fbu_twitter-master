@@ -12,7 +12,7 @@ protocol ComposeViewControllerDelegate {
     func did(post: Tweet)
 }
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
     
     var tweet: Tweet!
@@ -21,6 +21,8 @@ class ComposeViewController: UIViewController {
 
     
     @IBOutlet weak var textView: UITextView!
+    
+    @IBOutlet weak var charCountLabel: UILabel!
     
     var user = User.current!
     weak var delegate: TimelineViewController?
@@ -54,7 +56,8 @@ class ComposeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        // Hoy
+        textView.delegate = self
+        
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.setToolbarHidden(false, animated: true)
@@ -72,6 +75,23 @@ class ComposeViewController: UIViewController {
         photoImageView.af_setImage(withURL: tweet.user.profileImageUrl)
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    // Set the max character limit
+    let characterLimit = 140
+    
+    // Construct what the new text would be if we allowed the user's latest edit
+    let newText = NSString(string: self.textView.text!).replacingCharacters(in: range, with: text)
+    
+    // to handle user pasting over the character limit
+    if newText.count > 140 {
+    charCountLabel.text = "140"
+    } else {
+    charCountLabel.text = "\(140 - newText.count)"
+    }
+    
+    // The new text should be allowed? True/False
+    return newText.count < characterLimit
+    }
 
     /*
     // MARK: - Navigation
