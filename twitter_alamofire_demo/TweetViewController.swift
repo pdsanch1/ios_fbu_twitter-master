@@ -30,7 +30,21 @@ import UIKit
     }
     
     @IBAction func composeTweetButton(_ sender: Any) {
+        performSegue(withIdentifier: "composeTweetSegue", sender: nil)
     }
+    
+    @IBAction func goHomeButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let composeController = segue.destination as! ComposeViewController
+            composeController.tweet = self.tweet
+
+    }
+    
     
     @IBAction func retweetButton(_ sender: Any) {
         if tweet.retweeted {
@@ -90,8 +104,11 @@ import UIKit
         navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.setToolbarHidden(false, animated: true)
         
-        let addButton = UIBarButtonItem(title: "Reply", style: .done, target: self, action: #selector(composeTweetButton))
+        let addButton = UIBarButtonItem(title: "Compose", style: .done, target: self, action: #selector(composeTweetButton))
         
+        let homeButton = UIBarButtonItem(title: "Home", style: .done, target: self, action: #selector(goHomeButton))
+        
+        self.navigationItem.leftBarButtonItem = homeButton
         self.navigationItem.rightBarButtonItem = addButton
         
         
